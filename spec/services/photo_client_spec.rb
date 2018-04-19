@@ -40,4 +40,17 @@ RSpec.describe PhotoClient do
       end
     end
   end
+
+  describe '#last_request_success?' do
+    it 'returns true when last request is successful' do
+      subject.search("dog")
+      expect(subject.last_request_success?).to eq true
+    end
+
+    it 'returns false when last request has failed' do
+      allow(dummy_client).to receive(:search).and_raise(SocketError)
+      expect(subject.search("dog")).to eq []
+      expect(subject.last_request_success?).to eq false
+    end
+  end
 end
