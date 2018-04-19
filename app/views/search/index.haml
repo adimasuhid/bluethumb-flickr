@@ -1,1 +1,10 @@
-%h1 Hello
+%h1 BlueThumb Flickr Search
+
+= form_tag(root_path, method: :get) do
+  = text_field_tag :q, params[:q]
+  = submit_tag "Search" 
+
+- @results.each do |result|
+  %br
+  = image_tag result.source
+
