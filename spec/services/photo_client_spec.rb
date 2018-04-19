@@ -2,24 +2,34 @@ require 'rails_helper'
 
 RSpec.describe PhotoClient do
   let(:dummy_result) { double(url: "test-url") }
-  let(:dummy_client) { double(search: [dummy_result, dummy_result, dummy_result]) }
+  let(:dummy_client) { double(search: [dummy_result, dummy_result]) }
 
   subject { PhotoClient.new(dummy_client) }
 
   describe '#search' do
-    it 'returns photo objects' do
-      results = subject.search("dog")
+    context 'given empty string' do
+      it 'returns empty array' do
+        results = subject.search("")
 
-      expect(results).to_not be_empty
-      expect(results.sample).to respond_to :url
+        expect(results).to be_empty
+      end
     end
 
-    it 'calls search to client' do
-      expect(dummy_client)
-        .to receive(:search)
-        .with(hash_including(text: "dog"))
+    context 'given text' do
+      it 'returns photo objects' do
+        results = subject.search("dog")
 
-      subject.search("dog")
+        expect(results).to_not be_empty
+        expect(results.sample).to respond_to :url
+      end
+
+      it 'calls search to client' do
+        expect(dummy_client)
+          .to receive(:search)
+          .with(hash_including(text: "dog"))
+
+        subject.search("dog")
+      end
     end
 
     context 'given params' do

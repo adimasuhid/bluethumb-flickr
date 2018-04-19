@@ -5,6 +5,8 @@ class PhotoClient
   end
 
   def search(text, params = {})
+    return [] if text.blank?
+
     ensure_connection do
       client.search({
         api_key: api_key,
