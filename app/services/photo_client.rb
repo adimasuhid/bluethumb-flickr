@@ -1,8 +1,4 @@
 class PhotoClient
-  class Collection < Array
-    alias_method :total, :length
-  end
-
   def initialize(client = Flickr.new)
     @client = client
     @success = true

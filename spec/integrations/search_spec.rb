@@ -12,7 +12,7 @@ feature 'User searches photos' do
 
   context 'with non-empty string' do
     let(:collection) {
-      PhotoClient::Collection.new([
+      Collection.new([
         double(source: 'http://test_source.jpg', url: 'http://test_url.com')
       ])
     }
@@ -65,7 +65,7 @@ feature 'User searches photos' do
     end
   end
 
-  def use_dummy_client(results: PhotoClient::Collection.new, success: true)
+  def use_dummy_client(results: Collection.new, success: true)
     dummy_client = double(search: results, last_request_success?: success)
     allow(PhotoClient).to receive(:new).and_return(dummy_client)
   end
