@@ -1,12 +1,20 @@
-.search
-  - @results.each do |result|
-    %br
-    = link_to result.url, target: "_blank" do
-      = image_tag result.source
+.search.container
+  %br
+  .row
+    - @results.each do |result|
+      .col-lg-3.col-md-4.col-xs-6
+        = link_to result.url, target: "_blank" do
+          .search__image{ style: "background-image:url(#{result.source})"}
 
-  - if params[:q].blank?
-    %h2 Start searching
-  - elsif @results.empty?
-    %h2 No results found
+  .row
+    = will_paginate @results
 
-  = will_paginate @results
+  .row
+    .col
+    .col.search__greeting
+      %br
+      - if params[:q].blank?
+        %h2 Start searching
+      - elsif @results.empty?
+        %h2 No results found
+    .col

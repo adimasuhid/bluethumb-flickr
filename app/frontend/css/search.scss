@@ -1,2 +1,15 @@
 .search {
+
+  .search__image {
+    background-position:center;
+    background-size:cover;
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+
+  .search__greeting {
+    text-align: center;
+  }
 }

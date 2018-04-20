@@ -16,7 +16,7 @@ class SearchController < ApplicationController
   end
 
   def per_page
-    10
+    12
   end
 
   def current_page
