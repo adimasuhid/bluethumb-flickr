@@ -6,7 +6,8 @@
 
 - @results.each do |result|
   %br
-  = image_tag result.source
+  = link_to result.url, target: "_blank" do
+    = image_tag result.source
 
 - if params[:q].blank?
   %h2 Start searching

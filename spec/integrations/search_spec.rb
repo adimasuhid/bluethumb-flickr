@@ -13,7 +13,7 @@ feature 'User searches photos' do
   context 'with non-empty string' do
     let(:collection) {
       PhotoClient::Collection.new([
-        double(source: 'http://test_url.jpg')
+        double(source: 'http://test_source.jpg', url: 'http://test_url.com')
       ])
     }
 
@@ -24,7 +24,8 @@ feature 'User searches photos' do
       fill_in 'q', with: 'dog'
       click_button 'Search'
 
-      expect(page).to have_css('img')
+      expect(page).to have_css("img[src*='test_source.jpg']")
+      expect(page).to have_css("a[href*='test_url.com']")
       expect(page).to_not have_text('Start searching')
       expect(page).to_not have_text('No results found')
     end
@@ -35,7 +36,7 @@ feature 'User searches photos' do
       fill_in 'q', with: '23904850498539840932340'
       click_button 'Search'
 
-      expect(page).to_not have_css('img')
+      expect(page).to_not have_css("img[src*='test_source.jpg']")
       expect(page).to_not have_text('Start searching')
       expect(page).to have_text('No results found')
     end
@@ -46,7 +47,7 @@ feature 'User searches photos' do
       fill_in 'q', with: '23904850498539840932340'
       click_button 'Search'
 
-      expect(page).to_not have_css('img')
+      expect(page).to_not have_css("img[src*='test_source.jpg']")
       expect(page).to have_text('No results found')
       expect(page).to have_text('Search failed to connect')
     end
