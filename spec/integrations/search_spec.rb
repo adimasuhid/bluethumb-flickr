@@ -11,12 +11,14 @@ feature 'User searches photos' do
   end
 
   context 'with non-empty string' do
+    let(:collection) {
+      PhotoClient::Collection.new([
+        double(source: 'http://test_url.jpg')
+      ])
+    }
+
     scenario 'with results' do
-      use_dummy_client(
-        results: PhotoClient::EmptyCollection.new([
-          double(source: 'http://test_url.jpg')
-        ])
-      )
+      use_dummy_client(results: collection)
 
       visit root_path
       fill_in 'q', with: 'dog'
@@ -48,9 +50,21 @@ feature 'User searches photos' do
       expect(page).to have_text('No results found')
       expect(page).to have_text('Search failed to connect')
     end
+
+    scenario 'with paginated results' do
+      allow(collection).to receive(:total).and_return(1000)
+      use_dummy_client(results: collection)
+
+      visit root_path
+      fill_in 'q', with: 'dog'
+      click_button 'Search'
+
+      expect(page).to have_text('Previous')
+      expect(page).to have_text('Next')
+    end
   end
 
-  def use_dummy_client(results: PhotoClient::EmptyCollection.new, success: true)
+  def use_dummy_client(results: PhotoClient::Collection.new, success: true)
     dummy_client = double(search: results, last_request_success?: success)
     allow(PhotoClient).to receive(:new).and_return(dummy_client)
   end

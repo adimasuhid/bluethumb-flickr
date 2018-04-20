@@ -1,5 +1,5 @@
 class PhotoClient
-  class EmptyCollection < Array
+  class Collection < Array
     alias_method :total, :length
   end
 
@@ -9,7 +9,7 @@ class PhotoClient
   end
 
   def search(text, params = {})
-    return EmptyCollection.new if text.blank?
+    return Collection.new if text.blank?
 
     ensure_connection do
       client.search({
