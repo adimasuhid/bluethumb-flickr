@@ -1,24 +1,41 @@
-# README
+# BlueThumb Flickr Search App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple app to search photos via Flickr. You can check out the app [here](https://bluethumb-flickr.herokuapp.com).
 
-Things you may want to cover:
 
-* Ruby version
+### Stack
 
-* System dependencies
+Ruby 2.5.0
+Rails 5.2.0
+Webpack 3.10.0
 
-* Configuration
+### Setup
 
-* Database creation
+Clone the application
+```
+[some cloning here]
+```
 
-* Database initialization
+Ask the owner for *Master Key* for the credentials and add it to the project
+```
+cp master.key path/to/project/bluethumb-flickr/config/
+```
 
-* How to run the test suite
+Prepare database
+```
+rake db:create db:migrate
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Start server
+```
+rails s
+```
 
-* Deployment instructions
+### Tests
 
-* ...
+Running specs
+```
+bundle exec rspec spec
+```
+
+### Screenshots
