@@ -16,6 +16,7 @@ body {
   .next_page, .previous_page {
     display: block;
     color: white;
+    text-decoration: none;
 
     &.disabled {
       color: grey; 
