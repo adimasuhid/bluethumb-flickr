@@ -6,7 +6,7 @@ feature 'User searches photos' do
     fill_in 'q', with: ''
     click_button 'Search'
 
-    expect(page).to_not have_css('img')
+    expect(page).to_not have_css('.search__image')
     expect(page).to have_text('Start searching')
   end
 
@@ -24,7 +24,7 @@ feature 'User searches photos' do
       fill_in 'q', with: 'dog'
       click_button 'Search'
 
-      expect(page).to have_css("img[src*='test_source.jpg']")
+      expect(page).to have_css(".search__image")
       expect(page).to have_css("a[href*='test_url.com']")
       expect(page).to_not have_text('Start searching')
       expect(page).to_not have_text('No results found')
@@ -36,7 +36,7 @@ feature 'User searches photos' do
       fill_in 'q', with: '23904850498539840932340'
       click_button 'Search'
 
-      expect(page).to_not have_css("img[src*='test_source.jpg']")
+      expect(page).to_not have_css('.search__image')
       expect(page).to_not have_text('Start searching')
       expect(page).to have_text('No results found')
     end
