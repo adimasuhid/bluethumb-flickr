@@ -1,0 +1,6 @@
+%nav.navbar.navbar-dark.bg-darkest.justify-content-between
+  = link_to root_path, class: 'navbar-brand' do
+    %b BlueThumb Flickr Search
+  = form_tag(root_path, method: :get, class: 'form-inline') do
+    = text_field_tag :q, params[:q], class: 'form-control mr-sm-2', placeholder: 'Search Photos'
+    = submit_tag "Search", class: 'btn btn-outline-light my-2 my-sm-0'

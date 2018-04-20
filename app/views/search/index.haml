@@ -1,17 +1,12 @@
-%h1 BlueThumb Flickr Search
+.search
+  - @results.each do |result|
+    %br
+    = link_to result.url, target: "_blank" do
+      = image_tag result.source
 
-= form_tag(root_path, method: :get) do
-  = text_field_tag :q, params[:q]
-  = submit_tag "Search" 
+  - if params[:q].blank?
+    %h2 Start searching
+  - elsif @results.empty?
+    %h2 No results found
 
-- @results.each do |result|
-  %br
-  = link_to result.url, target: "_blank" do
-    = image_tag result.source
-
-- if params[:q].blank?
-  %h2 Start searching
-- elsif @results.empty?
-  %h2 No results found
-
-= will_paginate @results
+  = will_paginate @results
