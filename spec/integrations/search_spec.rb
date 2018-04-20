@@ -12,7 +12,11 @@ feature 'User searches photos' do
 
   context 'with non-empty string' do
     scenario 'with results' do
-      use_dummy_client(results: [double(source: 'http://test_url.jpg')])
+      use_dummy_client(
+        results: PhotoClient::EmptyCollection.new([
+          double(source: 'http://test_url.jpg')
+        ])
+      )
 
       visit root_path
       fill_in 'q', with: 'dog'
@@ -46,7 +50,7 @@ feature 'User searches photos' do
     end
   end
 
-  def use_dummy_client(results: [], success: true)
+  def use_dummy_client(results: PhotoClient::EmptyCollection.new, success: true)
     dummy_client = double(search: results, last_request_success?: success)
     allow(PhotoClient).to receive(:new).and_return(dummy_client)
   end

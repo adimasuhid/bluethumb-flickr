@@ -1,11 +1,15 @@
 class PhotoClient
+  class EmptyCollection < Array
+    alias_method :total, :length
+  end
+
   def initialize(client = Flickr.new)
     @client = client
     @success = true
   end
 
   def search(text, params = {})
-    return [] if text.blank?
+    return EmptyCollection.new if text.blank?
 
     ensure_connection do
       client.search({
