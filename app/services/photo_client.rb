@@ -36,7 +36,7 @@ class PhotoClient
       block.call
     rescue SocketError => e
       @success = false
-      []
+      Collection.new([])
     end
   end
 end

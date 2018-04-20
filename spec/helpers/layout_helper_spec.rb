@@ -11,11 +11,11 @@ RSpec.describe LayoutHelper do
     end
 
     it 'returns alert-error given :error' do
-      expect(helper.flash_class(:error)).to eq 'alert alert-error'
+      expect(helper.flash_class(:error)).to eq 'alert alert-danger'
     end
 
     it 'returns alert-error given :alert' do
-      expect(helper.flash_class(:alert)).to eq 'alert alert-error'
+      expect(helper.flash_class(:alert)).to eq 'alert alert-danger'
     end
 
     it 'returns nil when message has no corresponding class' do
