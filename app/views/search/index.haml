@@ -1,13 +1,14 @@
-.search.container
+.container.search
+  %br
+  .row.search__navigation
+    = render 'pagination', results: @results
+
   %br
   .row
     - @results.each do |result|
       .col-lg-3.col-md-4.col-xs-6
         = link_to result.url, target: "_blank" do
           .search__image{ style: "background-image:url(#{result.source})"}
-
-  .row
-    = will_paginate @results
 
   .row
     .col

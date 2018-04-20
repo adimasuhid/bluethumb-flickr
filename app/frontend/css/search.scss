@@ -1,8 +1,12 @@
 .search {
+  .search__navigation {
+    display: flex;
+    justify-content: space-between;
+  }
 
   .search__image {
-    background-position:center;
-    background-size:cover;
+    background-position: center;
+    background-size: cover;
     height: 250px;
     width: 250px;
     border-radius: 50%;

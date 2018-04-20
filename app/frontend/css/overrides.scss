@@ -6,3 +6,19 @@ body {
 .bg-darkest {
   background-color: black;
 }
+
+// will_paginate override
+.pagination {
+  & > a, & > .current, & > .gap {
+    display: none; 
+  }
+
+  .next_page, .previous_page {
+    display: block;
+    color: white;
+
+    &.disabled {
+      color: grey; 
+    }
+  }
+}
